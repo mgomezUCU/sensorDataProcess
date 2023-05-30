@@ -14,6 +14,8 @@ public class InputDataService {
 
     private final AuthService authService;
 
+    private final MessageService messageService;
+
     public SensorPostDataResponse sendData(InputSensorData inputSensorData) {
         if (!validateData(inputSensorData)) {
             return SensorPostDataResponse.builder().success(false).build();
@@ -22,6 +24,7 @@ public class InputDataService {
             return SensorPostDataResponse.builder().success(false).build();
         }
         dataRepository.saveData(inputSensorData);
+        messageService.sendMessage(inputSensorData.getWaterFlow().toString());
         return SensorPostDataResponse.builder().success(true).sensorId(inputSensorData.getSensorId()).build();
     }
 

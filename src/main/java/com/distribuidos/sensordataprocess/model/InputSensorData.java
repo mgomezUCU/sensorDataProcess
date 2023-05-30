@@ -16,5 +16,5 @@ public class InputSensorData {
 
     private Long timeStamp;
 
-    private double waterFlow;
+    private Double waterFlow;
 }
